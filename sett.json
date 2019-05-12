@@ -1,0 +1,59 @@
+{
+	"graphics": [ 
+		{
+			"loadFromUrl": {
+				"loading":false,
+				"url":"http://localhost:8081/api/1.0/data/getList",
+				"updateGrafByTime":true,
+				"timeInterval":2000
+			},
+			"pathData":"",
+			"chartName": {
+				"text":"Пример названия",
+				"fontSize":"24",
+				"fontFamily":"sans-serif",
+				"textAnchor":"middle",
+				"margin": 20
+			},
+			"pathUrl":"data2.json",
+			"locId":"#gr",
+			"height": 500,
+			"width": 500,
+			"margin": 40,
+			"padding": 2,
+			"xAxis": {
+				"exists" :true, 
+				"location": "down",
+				"locationLabel" :"bottom",
+				"color" : "#000000"} ,
+			"yAxis": {
+				"exists" :true, 
+				"location": "left",
+				"locationLabel" :"left",
+				"color" : "#000000"
+			},
+			"gridLineX": {
+				"exists" :true, 
+				"color" : "#AAAAAA",
+				"height" : 1
+			},
+			"gridLineY": {
+				"exists" :true, 
+				"color" :"#E667AF",
+				"height": "1px"
+			},
+			"colorContent": "#FF0000",
+			"hoverColor":"#0E417E",
+			"textDescriptionData": {
+				"exists":true,
+				"colorText":"#00FF00",
+				"location":"upper",
+				"fontSize":"12",
+				"fontFamily":"sans-serif",
+				"textAnchor":"middle"
+			},
+			"typeAnimation":"1",
+			"durationAnimation":2
+		}
+	]
+}
