@@ -320,30 +320,24 @@ function drawBarChart (pathSet, height, width, locId, inputData) {
 function drawLineChart (pathSet, height, width, locId) {
   $.getJSON(pathSet, function(data){
     $.each(data.lines, function(i, f) {
-
-    if(f.loadFromUrl==true) {
-      //console.log
-      d3.request('http://localhost:8081/api/1.0/data/getList')
-        .header("Content-Type", "application/json")
-        .get(function(data) {
-          console.log(data.response);
-          drawGraf(f, data.response, f.height, f.width, f.locId);
+      if(f.loadFromUrl==true) {
+        d3.request('http://localhost:8081/api/1.0/data/getList')
+          .header("Content-Type", "application/json")
+          .get(function(data) {
+            console.log(data.response);
+            drawGraf(f, data.response, f.height, f.width, f.locId);
           })
-    } 
-    else {
-      d3.json(f.pathData, function(datad) {
-      //drawGraf(f, datad, f.height, f.width, f.locId);
-      drawLines(datad);
+      } else {
+        d3.json(f.pathData, function(datad) {
+        //drawGraf(f, datad, f.height, f.width, f.locId);
+          drawLines(datad);
+        });  
+      }
     });
-   
-  }
-})
-
-})
+  })
   .fail(function(jqXHR, textStatus, errorThrown) { console.log('getJSON request failed! ' + errorThrown); })
-  }
+}
 $(function () {
-
   $.getJSON("settLines.json", function(data){
     $.each(data.lines, function(i, f) {
 
@@ -423,235 +417,246 @@ function drawLines(f, data, height, width, locId) {
 
 
  //console.log(minX, maxX, minY, maxY);
-        const scaleX = d3.scaleLinear()
-                         .domain([minX, maxX])
-                         .range([0, xAxisLength]);
+  const scaleX = d3.scaleLinear()
+                   .domain([minX, maxX])
+                   .range([0, xAxisLength]);
 
-        const scaleY = d3.scaleLinear()
-                         .domain([maxY, minY])
-                         .range([0, yAxisLength]);
-var datad = [];
-console.log(itemss);
+  const scaleY = d3.scaleLinear()
+                   .domain([maxY, minY])
+                   .range([0, yAxisLength]);
+  var datad = [];
+  //console.log(itemss);
 //console.log(datad);
-$.each(itemss, function(i, f)
-{
+  $.each(itemss, function(i, f) {
   //console.log(itemss[i].enabled);
-  var item = {item:[], enabled: true, lineId:itemss[i].lineId};
-  //var enabled = ;
-  //enabledLines[i] = itemss[i].enabled;
-  datad.push(item);
-  //datad.push({enabled:itemss[i].enabled});
-  console.log(datad);
-  var d = datad[i];
-  console.log(d);
-  $.each(f.items, function(j, f){
-    //console.log(d);
-    d.item.push({x: scaleX(f.x)+margin, y: scaleY(f.y) + margin});
+    var item = {item:[], enabled: true, lineId:itemss[i].lineId};
+    datad.push(item);
+    var d = datad[i];
+    $.each(f.items, function(j, f){
+      d.item.push({x: scaleX(f.x)+margin, y: scaleY(f.y) + margin});
+    })
   })
-
-
-})
-console.log(datad);
-//console.log(enabledLines);
-if(f.xAxis.exists==true) {
-// создаем ось X   
-  if(f.xAxis.locationLabel=="top") {
-    var xAxis = d3.axisTop()
-                  .scale(scaleX);
-  } else {
-    var xAxis = d3.axisBottom()
-                  .scale(scaleX);
-  } 
-       // отрисовка оси Х             
-  var loc;
-  if(f.xAxis.location=="down"){
-    loc = height - margin;
-  } else {
-    loc = margin;
-  }
-    var colorY;
-  if(f.xAxis.color==undefined) {
-    colorX = "#000000"; 
-  } else {
-    colorX = f.xAxis.color;
-  }
-  svg.append("g")
-     .attr("class", "x-axis")
-     .attr("transform",  // сдвиг оси вниз и вправо
-         "translate(" + margin + "," + (loc) + ")")
-     .style("color", colorX)
-     .call(xAxis);
-}
-
-if(f.yAxis.exists==true) {
-    // создаем ось Y     
-  if(f.yAxis.locationLabel == "left") {
-    var yAxis = d3.axisLeft()
-                  .scale(scaleY);
-  } else {
-    var yAxis = d3.axisRight()
-                  .scale(scaleY);
-  }
-  var colorY;
-  if(f.yAxis.color==undefined) {
-    colorY = "#000000"; 
-  } else {
-    colorY = f.yAxis.color;
-  }
-  var loc;
-  if(f.yAxis.location=="left"){
-    loc = margin;
-  } else {
-    loc = margin+xAxisLength;
-  }
-  svg.append("g")       
-    .attr("class", "y-axis")
-    .attr("transform", // сдвиг оси вниз и вправо на margin
-            "translate(" + loc + "," + margin + ")")
-    .style("color", colorY)
-    .call(yAxis);
-}
-
-
-// создаем набор вертикальных линий для сетки 
-d3.select(locId).selectAll("g.x-axis g.tick")
-    .append("line")
-    .classed("grid-line", true)
-    .attr("stroke", "#8B0000")
-    .attr("stroke-opacity", "0.1")
-    .attr("x1", 0)
-    .attr("y1", 0)
-    .attr("x2", 0)
-    .attr("y2", - (yAxisLength));
-  
-// рисуем горизонтальные линии координатной сетки
-d3.select(locId).selectAll("g.y-axis g.tick")
-    .append("line")
-    .classed("grid-line", true)
-    .attr("stroke", "#8B0000")
-    .attr("stroke-opacity", "0.1")
-    .attr("x1", 0)
-    .attr("y1", 0)
-    .attr("x2", xAxisLength)
-    .attr("y2", 0);
-
-var line = d3.line()
-            .x(function(d){return d.x;})
-            .y(function(d){return d.y;})
-            .curve(d3.curveCardinal);
-// добавляем путь
-//console.log(items);
-
-var legendTable = d3.select(locId).append("g")
-    .attr("transform", "translate(0, "+margin+")")
-    .attr("class", "legendTable");
- 
-var legend = legendTable.selectAll(".legend")
-    .data(datad)
-    .enter().append("g")
-    .attr("class", "legend")
-    .attr("transform", function(d, i) {
-        return "translate(0, " + i * 20 + ")"; 
-    });
- 
-legend.append("rect")
-    .attr("x", width - 50)
-    .attr("y", 4)
-    .attr("width", 10)
-    .attr("height", 10)
-    .attr("fill", function(d, i) { return colorScale(d.lineId); });
- 
-legend.append("text")
-    .attr("x", width - 35)
-    .attr("y", 9)
-    .attr("dy", ".35em")
-    .text(function(d, i) { return "line "+d.lineId; })
-    .on('click', clickLegendHandler);
-// $.each(datad, function(i, f){
-//   //console.log(f);
-//   svg.append("g").attr("class", "line").attr("id", f.lineId);
-// });
-//svg.data(datad);
 //console.log(datad);
-// $.each(datad, function(i, f){
-//   console.log();
-//   svg.append("g").attr("class", "line").append("path")
-// .attr("d", line(f.item))
-// .style("stroke", colorScale(f.lineId))
-// .style("stroke-width", 2);
-// })
-  //console.log();
-//   svg.selectAll("g.line").data(datad).append("path")
-// .attr("d", function(d) {return line(d.item)})
-// .style("stroke", function(d, i) { console.log(d); return colorScale(d.lineId); })
-// .style("stroke-width", 2);
-redrawLines();
+//console.log(enabledLines);
+  if(f.xAxis.exists==true) {
+  // создаем ось X   
+    if(f.xAxis.locationLabel=="top") {
+      var xAxis = d3.axisTop()
+                    .scale(scaleX);
+    } else {
+      var xAxis = d3.axisBottom()
+                    .scale(scaleX);
+    } 
+         // отрисовка оси Х             
+    var loc;
+    if(f.xAxis.location=="down"){
+      loc = height - margin;
+    } else {
+      loc = margin;
+    }
+      var colorY;
+    if(f.xAxis.color==undefined) {
+      colorX = "#000000"; 
+    } else {
+      colorX = f.xAxis.color;
+    }
+    svg.append("g")
+       .attr("class", "x-axis")
+       .attr("transform",  // сдвиг оси вниз и вправо
+           "translate(" + margin + "," + (loc) + ")")
+       .style("color", colorX)
+       .call(xAxis);
+  }
 
-//название диаграммы
-d3.select(locId).append("g").append("text")
-    .attr("x", width / 2)
-    .attr("y", f.chartName.margin)
-    .text(f.chartName.text)
-    .attr("font-family", f.chartName.fontFamily==undefined ? "sans-serif" : f.chartName.fontFamily)
-    .attr("font-size", f.chartName.fontSize==undefined ? "14px" : f.chartName.fontSize+"px")
-    .attr("text-anchor", f.chartName.textAnchor==undefined ? "middle" : f.chartName.textAnchor);
+  if(f.yAxis.exists==true) {
+      // создаем ось Y     
+    if(f.yAxis.locationLabel == "left") {
+      var yAxis = d3.axisLeft()
+                    .scale(scaleY);
+    } else {
+      var yAxis = d3.axisRight()
+                    .scale(scaleY);
+    }
+    var colorY;
+    if(f.yAxis.color==undefined) {
+      colorY = "#000000"; 
+    } else {
+      colorY = f.yAxis.color;
+    }
+    var loc;
+    if(f.yAxis.location=="left"){
+      loc = margin;
+    } else {
+      loc = margin+xAxisLength;
+    }
+    svg.append("g")       
+      .attr("class", "y-axis")
+      .attr("transform", // сдвиг оси вниз и вправо на margin
+              "translate(" + loc + "," + margin + ")")
+      .style("color", colorY)
+      .call(yAxis);
+  }
 
 
-function clickLegendHandler(lineId) {
-  //enabledLines[lineId].enabled = enabledLines[lineId].enabled;
+  // создаем набор вертикальных линий для сетки 
+  if(f.gridLineX.exists) {
+    d3.select(locId).selectAll("g.x-axis g.tick")
+      .append("line")
+      .classed("grid-line", true)
+      .attr("stroke", f.gridLineX.color==undefined ? "#8B0000": f.gridLineX.color)
+      .attr("stroke-opacity", "0.1")
+      .attr("x1", 0)
+      .attr("y1", 0)
+      .attr("x2", 0)
+      .attr("y2", - (yAxisLength));
+  }
+    
+  // рисуем горизонтальные линии координатной сетки
+  if(f.gridLineY.exists) {
+    d3.select(locId).selectAll("g.y-axis g.tick")
+      .append("line")
+      .classed("grid-line", true)
+      .attr("stroke", f.gridLineY.color==undefined ? "#8B0000": f.gridLineY.color)
+      .attr("stroke-opacity", "0.1")
+      .attr("x1", 0)
+      .attr("y1", 0)
+      .attr("x2", xAxisLength)
+      .attr("y2", 0);
+  }
 
-//console.log(lineId);
-console.log(datad[lineId.lineId].enabled);
-datad[lineId.lineId].enabled = !datad[lineId.lineId].enabled;
-//line.enabled = !line.enabled;
+  var line = d3.line()
+              .x(function(d){return d.x;})
+              .y(function(d){return d.y;})
+              .curve(d3.curveCardinal);
+  // добавляем путь
+  //console.log(items);
+//легенда диаграммы  
+  if(f.legend.exists) {
+    var legendTable = d3.select(locId).append("g")
+        .attr("transform", "translate(0, "+margin+")")
+        .attr("class", "legendTable");
+     
+    var legend = legendTable.selectAll(".legend")
+        .data(datad)
+        .enter().append("g")
+        .attr("class", "legend")
+        .attr("transform", function(d, i) {
+            return "translate(0, " + i * 20 + ")"; 
+        });
+     
+    legend.append("rect")
+        .attr("x", width - 50)
+        .attr("y", 4)
+        .attr("width", 10)
+        .attr("height", 10)
+        .attr("fill", function(d, i) { return colorScale(d.lineId); });
+     
+    legend.append("text")
+        .attr("x", width - 35)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .attr("font-family", f.legend.fontFamily==undefined ? "serif" : f.legend.fontFamily)
+        .attr("fill", f.legend.colorTextEnabled==undefined ? "#000000" : f.legend.colorTextEnabled)
+        .text(function(d, i) { return "line "+d.lineId; })
+        .on('click', clickLegendHandler);
+  }
+  // $.each(datad, function(i, f){
+  //   //console.log(f);
+  //   svg.append("g").attr("class", "line").attr("id", f.lineId);
+  // });
+  //svg.data(datad);
+  //console.log(datad);
+  // $.each(datad, function(i, f){
+  //   console.log();
+  //   svg.append("g").attr("class", "line").append("path")
+  // .attr("d", line(f.item))
+  // .style("stroke", colorScale(f.lineId))
+  // .style("stroke-width", 2);
+  // })
+    //console.log();
+  //   svg.selectAll("g.line").data(datad).append("path")
+  // .attr("d", function(d) {return line(d.item)})
+  // .style("stroke", function(d, i) { console.log(d); return colorScale(d.lineId); })
+  // .style("stroke-width", 2);
   redrawLines();
-}
-function redrawLines(){
-  console.log(datad)
-  var enabledLines = datad.filter(function(i) { return i.enabled; });
 
-  //console.log(enabledLines);
-var paths = svg.selectAll(".line").data(enabledLines);
-
-//   var legendTable = d3.select(locId).append("g")
-//     .attr("transform", "translate(0, "+margin+")")
-//     .attr("class", "legendTable");
- 
-// var legend = legendTable.selectAll(".legend")
-//     .data(enabledLines)
-//     .enter().append("g")
-//     .attr("class", "legend")
-//     .attr("transform", function(d, i) {
-//         return "translate(0, " + i * 20 + ")"; 
-//     });
- 
+  //название диаграммы
+  if(f.chartName.exists) {
+    d3.select(locId).append("g").append("text")
+        .attr("x", width / 2)
+        .attr("y", f.chartName.margin)
+        .text(f.chartName.text)
+        .attr("font-family", f.chartName.fontFamily==undefined ? "sans-serif" : f.chartName.fontFamily)
+        .attr("font-size", f.chartName.fontSize==undefined ? "14px" : f.chartName.fontSize+"px")
+        .attr("text-anchor", f.chartName.textAnchor==undefined ? "middle" : f.chartName.textAnchor);
+  }
 
 
+  function clickLegendHandler(lineId) {
+    //enabledLines[lineId].enabled = enabledLines[lineId].enabled;
+
+  //console.log(lineId);
+  //console.log(this);
+  console.log(datad[lineId.lineId].enabled);
+  
+    if(datad[lineId.lineId].enabled) {
+      console.log("tut");
+      d3.select(this).attr("fill", f.legend.colorTextNotEnabled==undefined ? "#808080" : f.legend.colorTextNotEnabled);
+    } else {
+      d3.select(this).attr("fill", f.legend.colorTextEnabled==undefined ? "#000000" : f.legend.colorTextEnabled);
+    }
+    datad[lineId.lineId].enabled = !datad[lineId.lineId].enabled;
+  //line.enabled = !line.enabled;
+    redrawLines();
+  }
+  function redrawLines(){
+    console.log(datad)
+    var enabledLines = datad.filter(function(i) { return i.enabled; });
+
+    //console.log(enabledLines);
+  var paths = svg.selectAll(".line").data(enabledLines);
+
+  //   var legendTable = d3.select(locId).append("g")
+  //     .attr("transform", "translate(0, "+margin+")")
+  //     .attr("class", "legendTable");
+   
+  // var legend = legendTable.selectAll(".legend")
+  //     .data(enabledLines)
+  //     .enter().append("g")
+  //     .attr("class", "legend")
+  //     .attr("transform", function(d, i) {
+  //         return "translate(0, " + i * 20 + ")"; 
+  //     });
+   
 
 
-// legend.append("rect")
-//     .attr("x", width - 50)
-//     .attr("y", 4)
-//     .attr("width", 10)
-//     .attr("height", 10)
-//     .attr("fill", function(d, i) { return colorScale(i); });
- 
-// legend.append("text")
-//     .attr("x", width - 35)
-//     .attr("y", 9)
-//     .attr("dy", ".35em")
-//     .text(function(d, i) { return "line "+(i+1); })
-//     .on('click', clickLegendHandler);
-// $.each(enabledLines, function(i, f){
-//   console.log(enabledLines.item);
 
-// })
-  paths.enter().append("path").merge(paths).attr("class", "line")
-.attr("d", function(d) {return line(d.item)})
-.style("stroke", function(d, i) { return colorScale(d.lineId); })
-.style("stroke-width", 2);
-paths.exit().remove();
-} 
+
+  // legend.append("rect")
+  //     .attr("x", width - 50)
+  //     .attr("y", 4)
+  //     .attr("width", 10)
+  //     .attr("height", 10)
+  //     .attr("fill", function(d, i) { return colorScale(i); });
+   
+  // legend.append("text")
+  //     .attr("x", width - 35)
+  //     .attr("y", 9)
+  //     .attr("dy", ".35em")
+  //     .text(function(d, i) { return "line "+(i+1); })
+  //     .on('click', clickLegendHandler);
+  // $.each(enabledLines, function(i, f){
+  //   console.log(enabledLines.item);
+
+  // })
+    paths.enter().append("path").merge(paths).attr("class", "line")
+  .attr("d", function(d) {return line(d.item)})
+  .style("stroke", function(d, i) { return colorScale(d.lineId); })
+  .style("stroke-width", 2);
+  paths.exit().remove();
+  console.log(this);
+
+  } 
 }
 
 

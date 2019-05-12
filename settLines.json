@@ -7,7 +7,6 @@
 				"updateGrafByTime":true,
 				"timeInterval":2000
 			},
-
 			"chartName": {
 				"exists":true,
 				"text":"Пример названия",
@@ -36,22 +35,18 @@
 			"gridLineX": {
 				"exists" :true, 
 				"color" : "#AAAAAA",
-				"height" : 1
 			},
 			"gridLineY": {
 				"exists" :true, 
 				"color" :"#E667AF",
-				"height": "1px"
 			},
 			"colorContent": "#FF0000",
 			"hoverColor":"#0E417E",
-			"textDescriptionData": {
+			"legend": {
 				"exists":true,
-				"colorText":"#00FF00",
-				"location":"upper",
-				"fontSize":"12",
-				"fontFamily":"sans-serif",
-				"textAnchor":"middle"
+				"colorTextEnabled":"#000000",
+				"colorTextNotEnabled":"#808080",
+				"fontFamily":"serif"
 			},
 			"typeAnimation":"1"
 		}
