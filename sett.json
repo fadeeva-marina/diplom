@@ -1,14 +1,15 @@
 {
 	"graphics": [ 
 		{
+			"pathData":"",
 			"loadFromUrl": {
-				"loading":false,
+				"loading":true,
 				"url":"http://localhost:8081/api/1.0/data/getList",
 				"updateGrafByTime":true,
-				"timeInterval":2000
+				"timeInterval":5000
 			},
-			"pathData":"",
 			"chartName": {
+				"exists":true,
 				"text":"Пример названия",
 				"fontSize":"24",
 				"fontFamily":"sans-serif",

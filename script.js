@@ -239,19 +239,21 @@ function drawGraf(f, data, height, width, locId) {
       .attr("text-anchor", f.chartName.textAnchor==undefined ? "middle" : f.chartName.textAnchor);
   }
 
-  // var timerId = setInterval(function() {
-  //   d3.request('http://localhost:8081/api/1.0/data/getList')
-  //     .on('error', function(e) {
-  //         clearInterval(timerId);
-  //         alert(e);
-  //     })
-  //     .header("Content-Type", "application/json")
-  //     .get(function(data) {
-  //       console.log(data.response);
-  //       d3.select(locId).select("svg").remove();
-  //       drawGraf(f, data.response, f.height, f.width, f.locId);
-  //     })
-  // }, 3000);
+  if(f.loadFromUrl.updateGrafByTime){
+    var timerId = setInterval(function() {
+      d3.request('http://localhost:8081/api/1.0/data/getList')
+        .on('error', function(e) {
+            clearInterval(timerId);
+            alert(e);
+        })
+        .header("Content-Type", "application/json")
+        .get(function(data) {
+          console.log(data.response);
+          d3.select(locId).select("svg").remove();
+          drawGraf(f, data.response, f.height, f.width, f.locId);
+        })
+    }, f.loadFromUrl.timeInterval);
+}
 }
 
 $(function () {
@@ -316,22 +318,26 @@ function drawBarChart (pathSet, height, width, locId, inputData) {
   .fail(function(jqXHR, textStatus, errorThrown) { console.log('getJSON request failed! ' + errorThrown); })
 }
 
-
+//функция отрисовки линейного графика
 function drawLineChart (pathSet, height, width, locId) {
   $.getJSON(pathSet, function(data){
     $.each(data.lines, function(i, f) {
-      if(f.loadFromUrl==true) {
-        d3.request('http://localhost:8081/api/1.0/data/getList')
+      if(f.loadFromUrl.loading==true) {
+        d3.request(f.loadFromUrl.url)
           .header("Content-Type", "application/json")
           .get(function(data) {
-            console.log(data.response);
-            drawGraf(f, data.response, f.height, f.width, f.locId);
+            drawLines(f, data.response, f.height, f.width, f.locId);
           })
+          .on('error', function(e) {
+            console.log(e);
+          }) 
       } else {
         d3.json(f.pathData, function(datad) {
-        //drawGraf(f, datad, f.height, f.width, f.locId);
-          drawLines(datad);
-        });  
+          drawLines(f, datad, f.height, f.width, f.locId);
+        })
+        .on('error', function(e) {
+          console.log(e);
+        });
       }
     });
   })

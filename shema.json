@@ -1,0 +1,526 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "graphics"
+  ],
+  "properties": {
+    "graphics": {
+      "$id": "#/properties/graphics",
+      "type": "array",
+      "title": "The Graphics Schema",
+      "items": {
+        "$id": "#/properties/graphics/items",
+        "type": "object",
+        "title": "The Items Schema",
+        "required": [
+          "pathData",
+          "loadFromUrl",
+          "chartName",
+          "pathUrl",
+          "locId",
+          "height",
+          "width",
+          "margin",
+          "padding",
+          "xAxis",
+          "yAxis",
+          "gridLineX",
+          "gridLineY",
+          "colorContent",
+          "hoverColor",
+          "textDescriptionData",
+          "typeAnimation",
+          "durationAnimation"
+        ],
+        "properties": {
+          "pathData": {
+            "$id": "#/properties/graphics/items/properties/pathData",
+            "type": "string",
+            "title": "The Pathdata Schema",
+            "default": "",
+            "examples": [
+              "data2.json"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "loadFromUrl": {
+            "$id": "#/properties/graphics/items/properties/loadFromUrl",
+            "type": "object",
+            "title": "The Loadfromurl Schema",
+            "required": [
+              "loading",
+              "url"
+            ],
+            "properties": {
+              "loading": {
+                "$id": "#/properties/graphics/items/properties/loadFromUrl/properties/loading",
+                "type": "boolean",
+                "title": "The Loading Schema",
+                "default": false,
+                "examples": [
+                  true
+                ]
+              },
+              "url": {
+                "$id": "#/properties/graphics/items/properties/loadFromUrl/properties/url",
+                "type": "string",
+                "title": "The Url Schema",
+                "default": "",
+                "examples": [
+                  "http://localhost:8081/api/1.0/data/getList"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "updateGrafByTime": {
+                "$id": "#/properties/graphics/items/properties/loadFromUrl/properties/updateGrafByTime",
+                "type": "boolean",
+                "title": "The Updategrafbytime Schema",
+                "default": false,
+                "examples": [
+                  false
+                ]
+              },
+              "timeInterval": {
+                "$id": "#/properties/graphics/items/properties/loadFromUrl/properties/timeInterval",
+                "type": "integer",
+                "title": "The Timeinterval Schema",
+                "default": 5000,
+                "examples": [
+                  5000
+                ]
+              }
+            }
+          },
+          "chartName": {
+            "$id": "#/properties/graphics/items/properties/chartName",
+            "type": "object",
+            "title": "The Chartname Schema",
+            "required": [
+              "exists",
+              "text",
+              "margin"
+            ],
+            "properties": {
+              "exists": {
+                "$id": "#/properties/graphics/items/properties/chartName/properties/exists",
+                "type": "boolean",
+                "title": "The Exists Schema",
+                "default": false,
+                "examples": [
+                  true
+                ]
+              },
+              "text": {
+                "$id": "#/properties/graphics/items/properties/chartName/properties/text",
+                "type": "string",
+                "title": "The Text Schema",
+                "default": "",
+                "examples": [
+                  "Пример названия"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "fontSize": {
+                "$id": "#/properties/graphics/items/properties/chartName/properties/fontSize",
+                "type": "string",
+                "title": "The Fontsize Schema",
+                "default": "",
+                "examples": [
+                  "24"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "fontFamily": {
+                "$id": "#/properties/graphics/items/properties/chartName/properties/fontFamily",
+                "type": "string",
+                "title": "The Fontfamily Schema",
+                "default": "",
+                "examples": [
+                  "sans-serif"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "textAnchor": {
+                "$id": "#/properties/graphics/items/properties/chartName/properties/textAnchor",
+                "type": "string",
+                "title": "The Textanchor Schema",
+                "default": "",
+                "examples": [
+                  "middle"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "margin": {
+                "$id": "#/properties/graphics/items/properties/chartName/properties/margin",
+                "type": "integer",
+                "title": "The Margin Schema",
+                "default": 20,
+                "examples": [
+                  20
+                ]
+              }
+            }
+          },
+          "pathUrl": {
+            "$id": "#/properties/graphics/items/properties/pathUrl",
+            "type": "string",
+            "title": "The Pathurl Schema",
+            "default": "",
+            "examples": [
+              "data2.json"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "locId": {
+            "$id": "#/properties/graphics/items/properties/locId",
+            "type": "string",
+            "title": "The Locid Schema",
+            "default": "",
+            "examples": [
+              "#gr"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "height": {
+            "$id": "#/properties/graphics/items/properties/height",
+            "type": "integer",
+            "title": "The Height Schema",
+            "default": 0,
+            "examples": [
+              500
+            ]
+          },
+          "width": {
+            "$id": "#/properties/graphics/items/properties/width",
+            "type": "integer",
+            "title": "The Width Schema",
+            "default": 0,
+            "examples": [
+              500
+            ]
+          },
+          "margin": {
+            "$id": "#/properties/graphics/items/properties/margin",
+            "type": "integer",
+            "title": "The Margin Schema",
+            "default": 0,
+            "examples": [
+              40
+            ]
+          },
+          "padding": {
+            "$id": "#/properties/graphics/items/properties/padding",
+            "type": "integer",
+            "title": "The Padding Schema",
+            "default": 0,
+            "examples": [
+              2
+            ]
+          },
+          "xAxis": {
+            "$id": "#/properties/graphics/items/properties/xAxis",
+            "type": "object",
+            "title": "The Xaxis Schema",
+            "required": [
+              "exists",
+              "location",
+              "locationLabel",
+              "color"
+            ],
+            "properties": {
+              "exists": {
+                "$id": "#/properties/graphics/items/properties/xAxis/properties/exists",
+                "type": "boolean",
+                "title": "The Exists Schema",
+                "default": false,
+                "examples": [
+                  true
+                ]
+              },
+              "location": {
+                "$id": "#/properties/graphics/items/properties/xAxis/properties/location",
+                "type": "string",
+                "title": "The Location Schema",
+                "default": "",
+                "examples": [
+                  "down"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "locationLabel": {
+                "$id": "#/properties/graphics/items/properties/xAxis/properties/locationLabel",
+                "type": "string",
+                "title": "The Locationlabel Schema",
+                "default": "",
+                "examples": [
+                  "bottom"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "color": {
+                "$id": "#/properties/graphics/items/properties/xAxis/properties/color",
+                "type": "string",
+                "title": "The Color Schema",
+                "default": "",
+                "examples": [
+                  "#000000"
+                ],
+                "pattern": "^(.*)$"
+              }
+            }
+          },
+          "yAxis": {
+            "$id": "#/properties/graphics/items/properties/yAxis",
+            "type": "object",
+            "title": "The Yaxis Schema",
+            "required": [
+              "exists",
+              "location",
+              "locationLabel",
+              "color"
+            ],
+            "properties": {
+              "exists": {
+                "$id": "#/properties/graphics/items/properties/yAxis/properties/exists",
+                "type": "boolean",
+                "title": "The Exists Schema",
+                "default": false,
+                "examples": [
+                  true
+                ]
+              },
+              "location": {
+                "$id": "#/properties/graphics/items/properties/yAxis/properties/location",
+                "type": "string",
+                "title": "The Location Schema",
+                "default": "",
+                "examples": [
+                  "left"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "locationLabel": {
+                "$id": "#/properties/graphics/items/properties/yAxis/properties/locationLabel",
+                "type": "string",
+                "title": "The Locationlabel Schema",
+                "default": "",
+                "examples": [
+                  "left"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "color": {
+                "$id": "#/properties/graphics/items/properties/yAxis/properties/color",
+                "type": "string",
+                "title": "The Color Schema",
+                "default": "",
+                "examples": [
+                  "#000000"
+                ],
+                "pattern": "^(.*)$"
+              }
+            }
+          },
+          "gridLineX": {
+            "$id": "#/properties/graphics/items/properties/gridLineX",
+            "type": "object",
+            "title": "The Gridlinex Schema",
+            "required": [
+              "exists",
+              "color",
+              "height"
+            ],
+            "properties": {
+              "exists": {
+                "$id": "#/properties/graphics/items/properties/gridLineX/properties/exists",
+                "type": "boolean",
+                "title": "The Exists Schema",
+                "default": false,
+                "examples": [
+                  true
+                ]
+              },
+              "color": {
+                "$id": "#/properties/graphics/items/properties/gridLineX/properties/color",
+                "type": "string",
+                "title": "The Color Schema",
+                "default": "",
+                "examples": [
+                  "#AAAAAA"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "height": {
+                "$id": "#/properties/graphics/items/properties/gridLineX/properties/height",
+                "type": "integer",
+                "title": "The Height Schema",
+                "default": 0,
+                "examples": [
+                  1
+                ]
+              }
+            }
+          },
+          "gridLineY": {
+            "$id": "#/properties/graphics/items/properties/gridLineY",
+            "type": "object",
+            "title": "The Gridliney Schema",
+            "required": [
+              "exists",
+              "color",
+              "height"
+            ],
+            "properties": {
+              "exists": {
+                "$id": "#/properties/graphics/items/properties/gridLineY/properties/exists",
+                "type": "boolean",
+                "title": "The Exists Schema",
+                "default": false,
+                "examples": [
+                  true
+                ]
+              },
+              "color": {
+                "$id": "#/properties/graphics/items/properties/gridLineY/properties/color",
+                "type": "string",
+                "title": "The Color Schema",
+                "default": "",
+                "examples": [
+                  "#E667AF"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "height": {
+                "$id": "#/properties/graphics/items/properties/gridLineY/properties/height",
+                "type": "string",
+                "title": "The Height Schema",
+                "default": "",
+                "examples": [
+                  "1px"
+                ],
+                "pattern": "^(.*)$"
+              }
+            }
+          },
+          "colorContent": {
+            "$id": "#/properties/graphics/items/properties/colorContent",
+            "type": "string",
+            "title": "The Colorcontent Schema",
+            "default": "",
+            "examples": [
+              "#FF0000"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "hoverColor": {
+            "$id": "#/properties/graphics/items/properties/hoverColor",
+            "type": "string",
+            "title": "The Hovercolor Schema",
+            "default": "",
+            "examples": [
+              "#0E417E"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "textDescriptionData": {
+            "$id": "#/properties/graphics/items/properties/textDescriptionData",
+            "type": "object",
+            "title": "The Textdescriptiondata Schema",
+            "required": [
+              "exists",
+              "colorText",
+              "location",
+              "fontSize",
+              "fontFamily",
+              "textAnchor"
+            ],
+            "properties": {
+              "exists": {
+                "$id": "#/properties/graphics/items/properties/textDescriptionData/properties/exists",
+                "type": "boolean",
+                "title": "The Exists Schema",
+                "default": false,
+                "examples": [
+                  true
+                ]
+              },
+              "colorText": {
+                "$id": "#/properties/graphics/items/properties/textDescriptionData/properties/colorText",
+                "type": "string",
+                "title": "The Colortext Schema",
+                "default": "",
+                "examples": [
+                  "#00FF00"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "location": {
+                "$id": "#/properties/graphics/items/properties/textDescriptionData/properties/location",
+                "type": "string",
+                "title": "The Location Schema",
+                "default": "",
+                "examples": [
+                  "upper"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "fontSize": {
+                "$id": "#/properties/graphics/items/properties/textDescriptionData/properties/fontSize",
+                "type": "string",
+                "title": "The Fontsize Schema",
+                "default": "",
+                "examples": [
+                  "12"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "fontFamily": {
+                "$id": "#/properties/graphics/items/properties/textDescriptionData/properties/fontFamily",
+                "type": "string",
+                "title": "The Fontfamily Schema",
+                "default": "",
+                "examples": [
+                  "sans-serif"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "textAnchor": {
+                "$id": "#/properties/graphics/items/properties/textDescriptionData/properties/textAnchor",
+                "type": "string",
+                "title": "The Textanchor Schema",
+                "default": "",
+                "examples": [
+                  "middle"
+                ],
+                "pattern": "^(.*)$"
+              }
+            }
+          },
+          "typeAnimation": {
+            "$id": "#/properties/graphics/items/properties/typeAnimation",
+            "type": "string",
+            "title": "The Typeanimation Schema",
+            "default": "",
+            "examples": [
+              "1"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "durationAnimation": {
+            "$id": "#/properties/graphics/items/properties/durationAnimation",
+            "type": "integer",
+            "title": "The Durationanimation Schema",
+            "default": 0,
+            "examples": [
+              2
+            ]
+          }
+        }
+      }
+    }
+  }
+}
