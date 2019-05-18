@@ -3,7 +3,7 @@
 		{
 			"pathData":"",
 			"loadFromUrl": {
-				"loading":true,
+				"loading":false,
 				"url":"http://localhost:8081/api/1.0/data/getList",
 				"updateGrafByTime":true,
 				"timeInterval":5000
@@ -11,12 +11,11 @@
 			"chartName": {
 				"exists":true,
 				"text":"Пример названия",
-				"fontSize":"24",
+				"fontSize":24,
 				"fontFamily":"sans-serif",
 				"textAnchor":"middle",
 				"margin": 20
 			},
-			"pathUrl":"data2.json",
 			"locId":"#gr",
 			"height": 500,
 			"width": 500,
@@ -49,7 +48,7 @@
 				"exists":true,
 				"colorText":"#00FF00",
 				"location":"upper",
-				"fontSize":"12",
+				"fontSize":12,
 				"fontFamily":"sans-serif",
 				"textAnchor":"middle"
 			},

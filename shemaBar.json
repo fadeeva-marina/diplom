@@ -19,22 +19,11 @@
         "required": [
           "pathData",
           "loadFromUrl",
-          "chartName",
-          "pathUrl",
           "locId",
           "height",
           "width",
           "margin",
-          "padding",
-          "xAxis",
-          "yAxis",
-          "gridLineX",
-          "gridLineY",
-          "colorContent",
-          "hoverColor",
-          "textDescriptionData",
-          "typeAnimation",
-          "durationAnimation"
+          "padding"
         ],
         "properties": {
           "pathData": {
@@ -43,7 +32,7 @@
             "title": "The Pathdata Schema",
             "default": "",
             "examples": [
-              "data2.json"
+              "data3.json"
             ],
             "pattern": "^(.*)$"
           },
@@ -53,7 +42,8 @@
             "title": "The Loadfromurl Schema",
             "required": [
               "loading",
-              "url"
+              "url",
+              "updateGrafByTime"
             ],
             "properties": {
               "loading": {
@@ -62,7 +52,7 @@
                 "title": "The Loading Schema",
                 "default": false,
                 "examples": [
-                  true
+                  false
                 ]
               },
               "url": {
@@ -71,7 +61,7 @@
                 "title": "The Url Schema",
                 "default": "",
                 "examples": [
-                  "http://localhost:8081/api/1.0/data/getList"
+                  "http://localhost:8081/api/1.0/data/getLines"
                 ],
                 "pattern": "^(.*)$"
               },
@@ -81,16 +71,16 @@
                 "title": "The Updategrafbytime Schema",
                 "default": false,
                 "examples": [
-                  false
+                  true
                 ]
               },
               "timeInterval": {
                 "$id": "#/properties/graphics/items/properties/loadFromUrl/properties/timeInterval",
                 "type": "integer",
                 "title": "The Timeinterval Schema",
-                "default": 5000,
+                "default": 10000,
                 "examples": [
-                  5000
+                  10000
                 ]
               }
             }
@@ -126,19 +116,18 @@
               },
               "fontSize": {
                 "$id": "#/properties/graphics/items/properties/chartName/properties/fontSize",
-                "type": "string",
+                "type": "integer",
                 "title": "The Fontsize Schema",
-                "default": "",
+                "default": 24,
                 "examples": [
-                  "24"
-                ],
-                "pattern": "^(.*)$"
+                  24
+                ]
               },
               "fontFamily": {
                 "$id": "#/properties/graphics/items/properties/chartName/properties/fontFamily",
                 "type": "string",
                 "title": "The Fontfamily Schema",
-                "default": "",
+                "default": "sans-serif",
                 "examples": [
                   "sans-serif"
                 ],
@@ -148,7 +137,7 @@
                 "$id": "#/properties/graphics/items/properties/chartName/properties/textAnchor",
                 "type": "string",
                 "title": "The Textanchor Schema",
-                "default": "",
+                "default": "middle",
                 "examples": [
                   "middle"
                 ],
@@ -165,16 +154,6 @@
               }
             }
           },
-          "pathUrl": {
-            "$id": "#/properties/graphics/items/properties/pathUrl",
-            "type": "string",
-            "title": "The Pathurl Schema",
-            "default": "",
-            "examples": [
-              "data2.json"
-            ],
-            "pattern": "^(.*)$"
-          },
           "locId": {
             "$id": "#/properties/graphics/items/properties/locId",
             "type": "string",
@@ -189,7 +168,7 @@
             "$id": "#/properties/graphics/items/properties/height",
             "type": "integer",
             "title": "The Height Schema",
-            "default": 0,
+            "default": 500,
             "examples": [
               500
             ]
@@ -198,7 +177,7 @@
             "$id": "#/properties/graphics/items/properties/width",
             "type": "integer",
             "title": "The Width Schema",
-            "default": 0,
+            "default": 800,
             "examples": [
               500
             ]
@@ -207,7 +186,7 @@
             "$id": "#/properties/graphics/items/properties/margin",
             "type": "integer",
             "title": "The Margin Schema",
-            "default": 0,
+            "default": 40,
             "examples": [
               40
             ]
@@ -216,7 +195,7 @@
             "$id": "#/properties/graphics/items/properties/padding",
             "type": "integer",
             "title": "The Padding Schema",
-            "default": 0,
+            "default": 2,
             "examples": [
               2
             ]
@@ -228,8 +207,7 @@
             "required": [
               "exists",
               "location",
-              "locationLabel",
-              "color"
+              "locationLabel"
             ],
             "properties": {
               "exists": {
@@ -247,7 +225,8 @@
                 "title": "The Location Schema",
                 "default": "",
                 "examples": [
-                  "down"
+                  "down",
+                  "up"
                 ],
                 "pattern": "^(.*)$"
               },
@@ -257,7 +236,8 @@
                 "title": "The Locationlabel Schema",
                 "default": "",
                 "examples": [
-                  "bottom"
+                  "bottom",
+                  "top"
                 ],
                 "pattern": "^(.*)$"
               },
@@ -280,8 +260,7 @@
             "required": [
               "exists",
               "location",
-              "locationLabel",
-              "color"
+              "locationLabel"
             ],
             "properties": {
               "exists": {
@@ -299,7 +278,8 @@
                 "title": "The Location Schema",
                 "default": "",
                 "examples": [
-                  "left"
+                  "left",
+                  "right"
                 ],
                 "pattern": "^(.*)$"
               },
@@ -309,7 +289,8 @@
                 "title": "The Locationlabel Schema",
                 "default": "",
                 "examples": [
-                  "left"
+                  "left",
+                  "right"
                 ],
                 "pattern": "^(.*)$"
               },
@@ -330,9 +311,7 @@
             "type": "object",
             "title": "The Gridlinex Schema",
             "required": [
-              "exists",
-              "color",
-              "height"
+              "exists"
             ],
             "properties": {
               "exists": {
@@ -358,7 +337,7 @@
                 "$id": "#/properties/graphics/items/properties/gridLineX/properties/height",
                 "type": "integer",
                 "title": "The Height Schema",
-                "default": 0,
+                "default": 1,
                 "examples": [
                   1
                 ]
@@ -370,9 +349,7 @@
             "type": "object",
             "title": "The Gridliney Schema",
             "required": [
-              "exists",
-              "color",
-              "height"
+              "exists"
             ],
             "properties": {
               "exists": {
@@ -432,11 +409,7 @@
             "title": "The Textdescriptiondata Schema",
             "required": [
               "exists",
-              "colorText",
-              "location",
-              "fontSize",
-              "fontFamily",
-              "textAnchor"
+              "location"
             ],
             "properties": {
               "exists": {
@@ -464,25 +437,24 @@
                 "title": "The Location Schema",
                 "default": "",
                 "examples": [
-                  "upper"
+                  "upper", "inToUp"
                 ],
                 "pattern": "^(.*)$"
               },
               "fontSize": {
                 "$id": "#/properties/graphics/items/properties/textDescriptionData/properties/fontSize",
-                "type": "string",
+                "type": "integer",
                 "title": "The Fontsize Schema",
-                "default": "",
+                "default": 12,
                 "examples": [
-                  "12"
-                ],
-                "pattern": "^(.*)$"
+                  12
+                ]
               },
               "fontFamily": {
                 "$id": "#/properties/graphics/items/properties/textDescriptionData/properties/fontFamily",
                 "type": "string",
                 "title": "The Fontfamily Schema",
-                "default": "",
+                "default": "sans-serif",
                 "examples": [
                   "sans-serif"
                 ],
@@ -492,7 +464,7 @@
                 "$id": "#/properties/graphics/items/properties/textDescriptionData/properties/textAnchor",
                 "type": "string",
                 "title": "The Textanchor Schema",
-                "default": "",
+                "default": "middle",
                 "examples": [
                   "middle"
                 ],
@@ -514,7 +486,7 @@
             "$id": "#/properties/graphics/items/properties/durationAnimation",
             "type": "integer",
             "title": "The Durationanimation Schema",
-            "default": 0,
+            "default": 2,
             "examples": [
               2
             ]

@@ -5,17 +5,16 @@
 				"loading":false,
 				"url":"http://localhost:8081/api/1.0/data/getLines",
 				"updateGrafByTime":true,
-				"timeInterval":2000
+				"timeInterval":10000
 			},
 			"chartName": {
 				"exists":true,
 				"text":"Пример названия",
-				"fontSize":"24",
+				"fontSize":24,
 				"fontFamily":"sans-serif",
 				"textAnchor":"middle",
 				"margin": 20
 			},
-			"pathUrl":"data2.json",
 			"pathData":"data3.json",
 			"locId":"#graph",
 			"height": 500,
@@ -25,7 +24,8 @@
 				"exists" :true, 
 				"location": "down",
 				"locationLabel" :"bottom",
-				"color" : "#000000"} ,
+				"color" : "#000000"
+			},
 			"yAxis": {
 				"exists" :true, 
 				"location": "left",
@@ -48,7 +48,7 @@
 				"colorTextNotEnabled":"#808080",
 				"fontFamily":"serif"
 			},
-			"typeAnimation":"1"
+			"curve": true
 		}
 	]
 }
