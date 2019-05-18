@@ -432,7 +432,7 @@
                 "pattern": "^(.*)$"
               },
               "location": {
-                "$id": "#/properties/graphics/items/properties/textDescriptionData/properties/location",
+                "$id": "#/properties/graphiincs/items/properties/textDescriptionData/properties/location",
                 "type": "string",
                 "title": "The Location Schema",
                 "default": "",

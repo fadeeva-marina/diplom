@@ -298,10 +298,12 @@ $(function () {
 })
 
 //функция отрисовки столбиковой диаграммы для внешнего использования
-function drawBarChart (pathSet, height, width, locId) {
+function drawBarChart (pathSet, height, width, locId, inputData) {
   $.getJSON(pathSet, function(data){
     $.each(data.graphics, function(i, f) {
-      if(f.loadFromUrl.loading==true) {
+      if(inputData != undefined) {
+        drawGraf(f, inputData, height||f.height, width||f.width, locId||f.locId);
+      } else if(f.loadFromUrl.loading==true) {
         d3.request(f.loadFromUrl.url)
           .header("Content-Type", "application/json")
           .get(function(data) {

@@ -40,8 +40,6 @@
 				"exists" :true, 
 				"color" :"#E667AF"
 			},
-			"colorContent": "#FF0000",
-			"hoverColor":"#0E417E",
 			"legend": {
 				"exists":true,
 				"colorTextEnabled":"#000000",

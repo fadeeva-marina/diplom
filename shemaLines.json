@@ -354,26 +354,6 @@
               }
             }
           },
-          "colorContent": {
-            "$id": "#/properties/lines/items/properties/colorContent",
-            "type": "string",
-            "title": "The Colorcontent Schema",
-            "default": "",
-            "examples": [
-              "#FF0000"
-            ],
-            "pattern": "^(.*)$"
-          },
-          "hoverColor": {
-            "$id": "#/properties/lines/items/properties/hoverColor",
-            "type": "string",
-            "title": "The Hovercolor Schema",
-            "default": "",
-            "examples": [
-              "#0E417E"
-            ],
-            "pattern": "^(.*)$"
-          },
           "legend": {
             "$id": "#/properties/lines/items/properties/legend",
             "type": "object",
