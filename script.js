@@ -577,7 +577,9 @@ function drawLines(f, data, height, width, locId) {
           .attr("class", "legend")
           .attr("transform", function(d, i) {
               return "translate(0, " + i * 20 + ")"; 
-          });
+          })
+
+          .on('click', clickLegendHandler);
        
       legend.append("rect")
           .attr("x", width - 50)
@@ -592,8 +594,7 @@ function drawLines(f, data, height, width, locId) {
           .attr("dy", ".35em")
           .attr("font-family", f.legend.fontFamily==undefined ? "serif" : f.legend.fontFamily)
           .attr("fill", f.legend.colorTextEnabled==undefined ? "#000000" : f.legend.colorTextEnabled)
-          .text(function(d, i) { return "line "+d.lineId; })
-          .on('click', clickLegendHandler);
+          .text(function(d, i) { return "line "+d.lineId; });
     }
   }
   if(f.loadFromUrl.loading) {
@@ -674,9 +675,9 @@ function drawLines(f, data, height, width, locId) {
   console.log(datad[lineId.lineId].enabled);
     if(datad[lineId.lineId].enabled) {
       console.log("tut");
-      d3.select(this).attr("fill", f.legend.colorTextNotEnabled==undefined ? "#808080" : f.legend.colorTextNotEnabled);
+      d3.select(this).select("text").attr("fill", f.legend.colorTextNotEnabled==undefined ? "#808080" : f.legend.colorTextNotEnabled);
     } else {
-      d3.select(this).attr("fill", f.legend.colorTextEnabled==undefined ? "#000000" : f.legend.colorTextEnabled);
+      d3.select(this).select("text").attr("fill", f.legend.colorTextEnabled==undefined ? "#000000" : f.legend.colorTextEnabled);
     }
     datad[lineId.lineId].enabled = !datad[lineId.lineId].enabled;
     redrawLines();
