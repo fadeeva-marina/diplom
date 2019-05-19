@@ -697,7 +697,8 @@ function drawLines(f, data, height, width, locId) {
          .attr("class", "line")
          .attr("d", function(d) {console.log(d); return line(d.item)})
          .style("stroke", function(d, i) { return colorScale(d.lineId); })
-         .style("stroke-width", 2);
+         .style("stroke-width", 2)
+         .attr("fill", "none");
     paths.exit().remove();
   } 
 }

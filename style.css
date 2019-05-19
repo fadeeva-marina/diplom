@@ -1,4 +1,4 @@
-#d2, #d3{
+/*#d2, #d3{
     width:50%;
     height:100px;
     float:left;
@@ -7,8 +7,8 @@
     color:white;
     border-radius: 10px;
     //display:none;
-}
-#cross {
+}*/
+/*#cross {
 
 }
 .text {
@@ -20,18 +20,18 @@
     margin: 10px 10px 10px 10px;
     padding: 10px 10px 10px 10px;
     float:left;
-}
-   .parent {
-    margin: 20%; /* Отступы вокруг элемента */
-    background: #fd0; /* Цвет фона */
-    padding: 10px; /* Поля вокруг текста */
+}*/
+/*   .parent {
+    margin: 20%; 
+    background: #fd0; 
+    padding: 10px; 
    }
    .child {
-    border: 3px solid #666; /* Параметры рамки */
-    padding: 10px; /* Поля вокруг текста */
-    margin: 10px; /* Отступы вокруг */
-   }
-   .button_blue {
+    border: 3px solid #666; 
+    padding: 10px; 
+    margin: 10px; 
+   }*/
+/*   .button_blue {
      //color: #fff;
      //background: #025ea1;
      //font-family: 'Open Sans', arial;
@@ -42,8 +42,8 @@
      //height:24px;
      //background-image:url('icon1.png')
      background: rgba(255, 255, 255, 0.5);
-   }
-   #kv1, #kv2, #kv3{
+   }*/
+/*   #kv1, #kv2, #kv3{
        width:80px;
        height:100px;
        float:left;
@@ -51,11 +51,11 @@
        margin:5px;
        color:white;
 
-   }
-   .axis path, .axis line {
+   }*/
+/*   .axis path, .axis line {
     fill: none;
-/*    stroke: #666;*/
-}
+    stroke: #666;
+}*/
 .axis .grid-line {
     /*stroke: #000;
     stroke-opacity: 0.2;*/
