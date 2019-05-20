@@ -9,7 +9,7 @@
 Установка и использование библиотеки 
 -----------------------------------
 1) Скачать последнюю версию библиотеки [тут](https://github.com/fadeeva-marina/diplom/blob/master/jGraf.js)
-2) С помощью json-схемы ([для линейного графика](https://github.com/fadeeva-marina/diplom/blob/master/shemaLines.json) и для [столбиковой диаграммы](https://github.com/fadeeva-marina/diplom/blob/master/shemaBar.json)) или на примере json-файлов ([линейный](https://github.com/fadeeva-marina/diplom/blob/master/settLines.json), [столбиковая диаграмма](https://github.com/fadeeva-marina/diplom/blob/master/sett.json)) создать собственный файл с настройками, на основе которых график будет отрисовываться на странице. 
+2) С помощью json-схемы ([для линейного графика](https://github.com/fadeeva-marina/diplom/blob/master/shemaLines.json) и для [столбиковой диаграммы](https://github.com/fadeeva-marina/diplom/blob/master/shemaBar.json)) или на примере json-файлов ([линейный](https://github.com/fadeeva-marina/diplom/blob/master/settLines.json), [столбиковая диаграмма](https://github.com/fadeeva-marina/diplom/blob/master/settBar.json)) создать собственный файл с настройками, на основе которых график будет отрисовываться на странице. 
 3) Подключить необходимые библиотеки в html-файле: библиотеку для формирования графиков, библиотеку jquery, а так же d3.js нужной версии(4.12.0). 
 ```html
     <script type="text/javascript" src="jGraf.js"></script>    
@@ -50,7 +50,7 @@ drawLineChart (pathSet, height, width, locId) - функция отрисовк�
 Параметры файла с настройками для столбиковой диаграммы
 -----------------------------------
 [JSON-Схема](https://github.com/fadeeva-marina/diplom/blob/master/shemaBar.json)
-[Пример](https://github.com/fadeeva-marina/diplom/blob/master/sett.json)
+[Пример](https://github.com/fadeeva-marina/diplom/blob/master/settBar.json)
 pathData -  путь к файлу с данными  
 
 loadFromUrl – блок для управления загрузкой данных с URL

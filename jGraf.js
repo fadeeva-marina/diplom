@@ -266,7 +266,7 @@ function drawGraf(f, data, height, width, locId) {
 }
 
 $(function () {
-  $.getJSON("sett.json", function(data){
+  $.getJSON("settBar.json", function(data){
     $.each(data.graphics, function(i, f) {
     if(f.loadFromUrl.loading==true) {
       d3.request(f.loadFromUrl.url)
