@@ -1,0 +1,313 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "pies"
+  ],
+  "properties": {
+    "pies": {
+      "$id": "#/properties/pies",
+      "type": "array",
+      "title": "The Pies Schema",
+      "items": {
+        "$id": "#/properties/pies/items",
+        "type": "object",
+        "title": "The Items Schema",
+        "required": [
+          "pathData",
+          "loadFromUrl",
+          "chartName",
+          "locId",
+          "height",
+          "width",
+          "margin"
+
+        ],
+        "properties": {
+          "pathData": {
+            "$id": "#/properties/pies/items/properties/pathData",
+            "type": "string",
+            "title": "The Pathdata Schema",
+            "default": "",
+            "examples": [
+              "data.json"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "loadFromUrl": {
+            "$id": "#/properties/pies/items/properties/loadFromUrl",
+            "type": "object",
+            "title": "The Loadfromurl Schema",
+            "required": [
+              "loading",
+              "url",
+              "updateGrafByTime"
+            ],
+            "properties": {
+              "loading": {
+                "$id": "#/properties/pies/items/properties/loadFromUrl/properties/loading",
+                "type": "boolean",
+                "title": "The Loading Schema",
+                "default": false,
+                "examples": [
+                  false
+                ]
+              },
+              "url": {
+                "$id": "#/properties/pies/items/properties/loadFromUrl/properties/url",
+                "type": "string",
+                "title": "The Url Schema",
+                "default": "",
+                "examples": [
+                  "http://localhost:8081/api/1.0/data/getList"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "updateGrafByTime": {
+                "$id": "#/properties/pies/items/properties/loadFromUrl/properties/updateGrafByTime",
+                "type": "boolean",
+                "title": "The Updategrafbytime Schema",
+                "default": false,
+                "examples": [
+                  true
+                ]
+              },
+              "timeInterval": {
+                "$id": "#/properties/pies/items/properties/loadFromUrl/properties/timeInterval",
+                "type": "integer",
+                "title": "The Timeinterval Schema",
+                "default": 0,
+                "examples": [
+                  5000
+                ]
+              }
+            }
+          },
+          "chartName": {
+            "$id": "#/properties/pies/items/properties/chartName",
+            "type": "object",
+            "title": "The Chartname Schema",
+            "required": [
+              "exists",
+              "text",
+              "margin"
+            ],
+            "properties": {
+              "exists": {
+                "$id": "#/properties/pies/items/properties/chartName/properties/exists",
+                "type": "boolean",
+                "title": "The Exists Schema",
+                "default": false,
+                "examples": [
+                  true
+                ]
+              },
+              "text": {
+                "$id": "#/properties/pies/items/properties/chartName/properties/text",
+                "type": "string",
+                "title": "The Text Schema",
+                "default": "",
+                "examples": [
+                  "Название"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "fontSize": {
+                "$id": "#/properties/pies/items/properties/chartName/properties/fontSize",
+                "type": "integer",
+                "title": "The Fontsize Schema",
+                "default": 24,
+                "examples": [
+                  24
+                ]
+              },
+              "fontFamily": {
+                "$id": "#/properties/pies/items/properties/chartName/properties/fontFamily",
+                "type": "string",
+                "title": "The Fontfamily Schema",
+                "default": "sans-serif",
+                "examples": [
+                  "sans-serif"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "textAnchor": {
+                "$id": "#/properties/pies/items/properties/chartName/properties/textAnchor",
+                "type": "string",
+                "title": "The Textanchor Schema",
+                "default": "middle",
+                "examples": [
+                  "middle"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "margin": {
+                "$id": "#/properties/pies/items/properties/chartName/properties/margin",
+                "type": "integer",
+                "title": "The Margin Schema",
+                "default": 20,
+                "examples": [
+                  20
+                ]
+              }
+            }
+          },
+          "locId": {
+            "$id": "#/properties/pies/items/properties/locId",
+            "type": "string",
+            "title": "The Locid Schema",
+            "default": "",
+            "examples": [
+              "#pie"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "height": {
+            "$id": "#/properties/pies/items/properties/height",
+            "type": "integer",
+            "title": "The Height Schema",
+            "default": 500,
+            "examples": [
+              500
+            ]
+          },
+          "width": {
+            "$id": "#/properties/pies/items/properties/width",
+            "type": "integer",
+            "title": "The Width Schema",
+            "default": 500,
+            "examples": [
+              500
+            ]
+          },
+          "margin": {
+            "$id": "#/properties/pies/items/properties/margin",
+            "type": "integer",
+            "title": "The Margin Schema",
+            "default": 30,
+            "examples": [
+              30
+            ]
+          },
+          "innerRadius": {
+            "$id": "#/properties/pies/items/properties/innerRadius",
+            "type": "integer",
+            "title": "The Innerradius Schema",
+            "default": 0,
+            "examples": [
+              30
+            ]
+          },
+          "outerRadius": {
+            "$id": "#/properties/pies/items/properties/outerRadius",
+            "type": "integer",
+            "title": "The Outerradius Schema",
+            "default": 0,
+            "examples": [
+              200
+            ]
+          },
+          "textDescriptionData": {
+            "$id": "#/properties/pies/items/properties/textDescriptionData",
+            "type": "object",
+            "title": "The Textdescriptiondata Schema",
+            "required": [
+              "exists"
+            ],
+            "properties": {
+              "exists": {
+                "$id": "#/properties/pies/items/properties/textDescriptionData/properties/exists",
+                "type": "boolean",
+                "title": "The Exists Schema",
+                "default": false,
+                "examples": [
+                  true
+                ]
+              },
+              "colorText": {
+                "$id": "#/properties/pies/items/properties/textDescriptionData/properties/colorText",
+                "type": "string",
+                "title": "The Colortext Schema",
+                "default": "",
+                "examples": [
+                  "#00FF00"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "fontSize": {
+                "$id": "#/properties/pies/items/properties/textDescriptionData/properties/fontSize",
+                "type": "integer",
+                "title": "The Fontsize Schema",
+                "default": 0,
+                "examples": [
+                  12
+                ]
+              }
+            }
+          },
+          "legend": {
+            "$id": "#/properties/pies/items/properties/legend",
+            "type": "object",
+            "title": "The Legend Schema",
+            "required": [
+              "exists"
+            ],
+            "properties": {
+              "exists": {
+                "$id": "#/properties/pies/items/properties/legend/properties/exists",
+                "type": "boolean",
+                "title": "The Exists Schema",
+                "default": false,
+                "examples": [
+                  true
+                ]
+              },
+              "colorText": {
+                "$id": "#/properties/pies/items/properties/legend/properties/colorText",
+                "type": "string",
+                "title": "The Colortext Schema",
+                "default": "",
+                "examples": [
+                  "#000000"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "fontFamily": {
+                "$id": "#/properties/pies/items/properties/legend/properties/fontFamily",
+                "type": "string",
+                "title": "The Fontfamily Schema",
+                "default": "",
+                "examples": [
+                  "serif"
+                ],
+                "pattern": "^(.*)$"
+              }
+            }
+          },
+          "typeAnimation": {
+            "$id": "#/properties/pies/items/properties/typeAnimation",
+            "type": "string",
+            "title": "The Typeanimation Schema",
+            "default": "",
+            "examples": [
+              "1"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "durationAnimation": {
+            "$id": "#/properties/pies/items/properties/durationAnimation",
+            "type": "integer",
+            "title": "The Durationanimation Schema",
+            "default": 0,
+            "examples": [
+              2
+            ]
+          }
+        }
+      }
+    }
+  }
+}

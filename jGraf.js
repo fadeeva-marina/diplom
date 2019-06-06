@@ -772,7 +772,7 @@ function drawPie(f, data, height, width, locId) {
   // создаем элемент арки с радиусом
   var arc = d3.arc()
       .outerRadius(f.outerRadius||radius)
-      .innerRadius(f.innerRadius);
+      .innerRadius(f.innerRadius||0);
        
   var pie = d3.pie()
       .sort(null)
@@ -859,7 +859,7 @@ function drawPie(f, data, height, width, locId) {
             .attr("y", 9)
             .attr("dy", ".35em")
             .attr("font-family", f.legend.fontFamily==undefined ? "serif" : f.legend.fontFamily)
-            .attr("fill", f.legend.colorTextEnabled==undefined ? "#000000" : f.legend.colorTextEnabled)
+            .attr("fill", f.legend.colorText==undefined ? "#000000" : f.legend.colorText)
             .text(function(d, i) { return d.data.name; });
     }
   }

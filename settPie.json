@@ -29,8 +29,7 @@
 			},
 			"legend": {
 				"exists":true,
-				"colorTextEnabled":"#000000",
-				"colorTextNotEnabled":"#808080",
+				"colorText":"#000000",
 				"fontFamily":"serif"
 			},
 			"typeAnimation":"1",
