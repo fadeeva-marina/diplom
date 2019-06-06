@@ -410,7 +410,11 @@ function drawLines(f, data, height, width, locId) {
 
   //console.log(datas);
   var margin = f.margin;
-  var svg = d3.select("body").append("svg")
+  // var svg = d3.select("body").select(locId).append("svg")
+  //             .attr("class", "axis")
+  //             .attr("width", width)
+  //             .attr("height", height);
+                var svg = d3.select("body").append("svg")
               .attr("class", "axis")
               .attr("id", locId.substring(1))
               .attr("width", width)
@@ -701,4 +705,194 @@ function drawLines(f, data, height, width, locId) {
          .attr("fill", "none");
     paths.exit().remove();
   } 
+}
+
+function drawPieChart (pathSet, height, width, locId, inputData) {
+  $.getJSON(pathSet, function(data){
+    $.each(data.pies, function(i, f) {
+      if(inputData != undefined) {
+        drawGraf(f, inputData, height||f.height, width||f.width, locId||f.locId);
+      } else if(f.loadFromUrl.loading==true) {
+        d3.request(f.loadFromUrl.url)
+          .header("Content-Type", "application/json")
+          .get(function(data) {
+            drawPie(f, data.response, height||f.height, width||f.width, locId||f.locId);
+          })
+      } else if((f.pathData != undefined)||(f.pathData != "")) {
+        d3.json(f.pathData, function(datad) {
+          drawPie(f, datad, height||f.height, width||f.width, locId||f.locId);
+        });
+      } else {
+        console.log("Введите название файла в найстройках!");
+      }
+    });
+  })
+  .fail(function(jqXHR, textStatus, errorThrown) { console.log('getJSON request failed! ' + errorThrown); })
+}  
+
+
+$(function () {
+  $.getJSON("settPie.json", function(data){
+    $.each(data.pies, function(i, f) {
+      if(f.loadFromUrl.loading==true) {
+        //console.log
+        d3.request(f.loadFromUrl.url)
+          .header("Content-Type", "application/json")
+          .get(function(data) {
+            console.log(data.response);
+            drawPie(f, data.response, f.height, f.width, f.locId);
+            })
+      } else {
+        d3.json(f.pathData, function(datad) {
+          drawPie(f, datad, f.height, f.width, f.locId);
+        }).on('error', function(e) {
+          console.log(e);
+        });
+      }
+    });
+  }).fail(function(jqXHR, textStatus, errorThrown) { console.log('getJSON request failed! ' + errorThrown); })
+});
+
+
+function drawPie(f, data, height, width, locId) {
+  console.log(data);
+  if(typeof data == "string") {
+    var datas = JSON.parse(data);
+  } else if (data.items == null) {
+    var datas = {items:data};
+  } else {
+    var datas = data;
+  }
+// функция для получения цветов
+  var color = d3.scaleOrdinal(d3.schemeCategory20);
+   //const colorScale = d3.scaleOrdinal(d3.schemeCategory20);
+  // задаем радиус
+  var radius = Math.min(width - 2*f.margin, height- 2*f.margin) / 2;
+   
+  // создаем элемент арки с радиусом
+  var arc = d3.arc()
+      .outerRadius(f.outerRadius||radius)
+      .innerRadius(f.innerRadius);
+       
+  var pie = d3.pie()
+      .sort(null)
+      .value(function(d) { return d.value; });
+   
+  var svg = d3.select("body").append("svg")
+          .attr("class", "axis")
+          .attr("width", width)
+          .attr("height", height)
+          .attr("id", locId.substring(1))
+          .append("g")
+          .attr("transform", 
+              "translate(" +(width / 2) + "," + (height / 2 ) + ")");
+
+  var g = svg.selectAll(".arc")
+             .data(pie(datas.items))
+             .enter().append("g")
+             .attr("class", "arc");  
+
+  var path = g.append("path")
+              .attr("d", arc)
+              .style("fill", function(d) { return color(d.data.name); });
+
+  if(f.textDescriptionData != null) {
+    if(f.textDescriptionData.exists) {
+      g.append("text")
+       .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+       .style("text-anchor", "middle")
+       .style("color", f.textDescriptionData.colorText)
+       .style("font-size", f.textDescriptionData.fontSize+"px")
+       .text(function(d) { return d.data.name; });
+    }
+  }
+
+  if(f.typeAnimation=="1") {
+    path.on('mouseover', function(d) {
+          d3.select(this)  // Выберем элемент, на который наведена мышь
+            .transition()  // Начинаем анимацию
+            .duration(f.durationAnimation) // Длительность анимации
+            .attr('transform', function(d) { // Перемещаем элемент по радиусу от центра
+              // Направление, по которому смещаем, — среднее от начального и конечного угла дуги
+              var a = (d.endAngle+d.startAngle)/ 2,
+                // Смещение по оси x — противоположный катет
+              dx =  20*Math.sin( a ),
+                // Смещение по оси y — прилежащий катет (ось направлена вниз, нулевой угол — вверх)
+              dy = -20*Math.cos( a );
+              return 'translate(' + dx + ','+dy+')';
+            });
+        })
+        .on('mouseleave', function(d) {
+          d3.select(this)
+            .transition()
+            .duration(f.durationAnimation)
+            // Возвращаем в начальную позицию
+            .attr('transform', function(d) {
+              return 'translate(0,0)';
+            });
+        });
+  }
+
+  if(f.legend != undefined) {
+    if(f.legend.exists) {
+      var legendTable = d3.select(locId).append("g")
+                          .attr("transform", "translate("+(20)+", "+(f.margin)+")")
+                          .attr("class", "legendTable");
+
+      var legend = legendTable.selectAll(".legend")
+                              .data(pie(datas.items))
+                              .enter().append("g")
+                              .attr("class", "legend")
+                              .attr("transform", function(d, i) {
+                                  return "translate(0, " + i * 20 + ")"; 
+                              });
+         
+      legend.append("rect")
+            .attr("x", width - 50)
+            .attr("y", 4)
+            .attr("width", 10)
+            .attr("height", 10)
+            .attr("fill", function(d, i) { return color(d.data.name); });
+         
+      legend.append("text")
+            .attr("x", width - 35)
+            .attr("y", 9)
+            .attr("dy", ".35em")
+            .attr("font-family", f.legend.fontFamily==undefined ? "serif" : f.legend.fontFamily)
+            .attr("fill", f.legend.colorTextEnabled==undefined ? "#000000" : f.legend.colorTextEnabled)
+            .text(function(d, i) { return d.data.name; });
+    }
+  }
+      
+  if(f.chartName != undefined) {
+    if(f.chartName.exists) {
+      d3.select(locId)
+            .append("g")
+            .append("text")
+            .attr("x", width / 2)
+            .attr("y", f.chartName.margin)
+            .text(f.chartName.text)
+            .attr("font-family", f.chartName.fontFamily==undefined ? "sans-serif" : f.chartName.fontFamily)
+            .attr("font-size", f.chartName.fontSize==undefined ? "14px" : f.chartName.fontSize+"px")
+            .attr("text-anchor", f.chartName.textAnchor==undefined ? "middle" : f.chartName.textAnchor);
+    }
+  }
+
+  if(f.loadFromUrl.loading) {
+    if(f.loadFromUrl.updateGrafByTime){
+      var timerId = setInterval(function() {
+        d3.request(f.loadFromUrl.url)
+          .on('error', function(e) {
+            clearInterval(timerId);
+            alert(e);
+          })
+          .header("Content-Type", "application/json")
+          .get(function(data) {
+            console.log(data.response);
+            d3.select(f.locId).remove();
+            drawPie(f, datad, f.height, f.width, f.locId);
+          })
+      }, f.loadFromUrl.timeInterval);
+    }
+  }
 }
